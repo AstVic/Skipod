@@ -4,9 +4,9 @@
 #include <omp.h>
 
 #define Max(a,b) ((a)>(b)?(a):(b))
-#define N (2*2*2*2*2*2*2*2*2*2*2*2+2)
+#define N (2*2*2*2*2*2*2*2*2*2+2)
 
-double maxeps = 0.1e-7;
+double maxeps = 1e-7;
 int itmax = 100;
 double eps;
 
@@ -14,19 +14,18 @@ double A[N][N];
 
 void relax();
 void init();
-void verify(); 
+void verify();
 
-int main(int an, char **as)
+int main(int argc, char **argv)
 {
     double t_start = omp_get_wtime();
 
-    int it;
-
     init();
 
+    int it;
     for (it = 1; it <= itmax; it++)
     {
-        eps = 0.;
+        eps = 0.0;
         relax();
         printf("it=%4i   eps=%f\n", it, eps);
         if (eps < maxeps) break;
@@ -40,76 +39,52 @@ int main(int an, char **as)
     return 0;
 }
 
-
 void init()
 {
-    // cache-friendly порядок: i внешний, j внутренний
+    // Инициализация границ
     for (int i = 0; i < N; i++)
+    {
+        A[i][0] = 0.0;
+        A[i][N-1] = 0.0;
+    }
     for (int j = 0; j < N; j++)
     {
-        if (i == 0 || i == N-1 || j == 0 || j == N-1)
-            A[i][j] = 0.;
-        else
-            A[i][j] = 2 + i + j;
+        A[0][j] = 0.0;
+        A[N-1][j] = 0.0;
     }
-}
 
+    // Инициализация внутренних ячеек
+    for (int i = 1; i < N-1; i++)
+        for (int j = 1; j < N-1; j++)
+            A[i][j] = 2.0 + i + j;
+}
 
 void relax()
 {
-    const double inv6 = 1.0 / 6.0;  // избегаем деления в цикле
+    const double inv6 = 1.0 / 6.0;
 
-    // оптимальный порядок обхода
     for (int i = 1; i < N-1; i++)
-    for (int j = 1; j < N-1; j++)
-    {
-        double old = A[i][j];
-
-        double newv =
-            ( 2.0 * A[i-1][j]
-            +       A[i+1][j]
-            + 2.0 * A[i][j-1]
-            +       A[i][j+1]
-            ) * inv6;
-
-        A[i][j] = newv;
-
-        double diff = fabs(newv - old);
-        if (diff > eps) eps = diff;
-    }
+        for (int j = 1; j < N-1; j++)
+        {
+            double old = A[i][j];
+            double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) * inv6;
+            A[i][j] = newv;
+            double diff = fabs(newv - old);
+            if (diff > eps) eps = diff;
+        }
 }
-
-
-// void verify()
-// {
-//     double s = 0.0;
-
-//     for (int i = 0; i < N; i++)
-//     for (int j = 0; j < N; j++)
-//         s += A[i][j] * (i+1) * (j+1) / (double)(N*N);
-
-//     printf("  S = %f\n", s);
-// }
 
 void verify()
 {
     double s = 0.0;
-    const double invNN = 1.0 / (double)(N * N);
 
     for (int i = 0; i < N; i++)
     {
-        double fi = (double)(i + 1);
-        double si = 0.0;  // локальная сумма строки
-
+        double fi = (double)(i+1);
         for (int j = 0; j < N; j++)
-        {
-            si += A[i][j] * fi * (double)(j + 1);
-        }
-
-        s += si;
+            s += A[i][j] * fi * (double)(j+1);
     }
 
-    s *= invNN;
-
+    s /= (double)(N * N);
     printf("  S = %f\n", s);
 }
