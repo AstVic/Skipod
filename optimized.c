@@ -4,7 +4,7 @@
 #include <omp.h>
 
 #define Max(a,b) ((a)>(b)?(a):(b))
-#define N (2*2*2*2*2*2*2*2*2*2+2)
+#define N (2*2*2*2*2*2*2*2*2*2*2+2)
 
 double maxeps = 1e-7;
 int itmax = 100;
@@ -77,14 +77,16 @@ void relax()
 void verify()
 {
     double s = 0.0;
+    double nn = 1.0 / (N * N); 
 
     for (int i = 0; i < N; i++)
     {
-        double fi = (double)(i+1);
+        double fi = (i + 1) * nn; 
         for (int j = 0; j < N; j++)
-            s += A[i][j] * fi * (double)(j+1);
+        {
+            s += A[i][j] * fi * (j + 1);
+        }
     }
-
-    s /= (double)(N * N);
+    
     printf("  S = %f\n", s);
 }
