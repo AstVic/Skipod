@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <omp.h>   
 #define  Max(a,b) ((a)>(b)?(a):(b))
 
 #define  N   (2*2*2*2*2*2+2)
@@ -16,7 +17,9 @@ void init();
 void verify(); 
 
 int main(int an, char **as)
-{
+{	
+	double t_start = omp_get_wtime();
+
 	int it;
 
 	init();
@@ -30,6 +33,9 @@ int main(int an, char **as)
 	}
 
 	verify();
+
+	double t_end = omp_get_wtime();
+	printf("Time = %f seconds\n", t_end - t_start);
 
 	return 0;
 }

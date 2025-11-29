@@ -1,0 +1,31 @@
+original.c
+1) Time = 1.506834 seconds
+2) Time = 1.517796 seconds
+3) Time = 1.646308 seconds
+
+original.c with -O3 optimization
+1) Time = 0.918216 seconds
+2) Time = 1.067179 seconds
+3) Time = 1.058167 seconds
+
+original.c with -O2 optimization
+1) Time = 1.016871 seconds
+2) Time = 1.062760 seconds
+3) Time = 1.060677 seconds
+---------------------------------
+
+optimized.c
+1) Time = 1.058764 seconds
+2) Time = 1.017209 seconds
+3) Time = 0.967111 seconds
+
+optimized.c with -O3 optimization
+1) Time = 0.560966 seconds
+2) Time = 0.547445 seconds
+3) Time = 0.539500 seconds
+
+optimized.c with -O2 optimization
+1) Time = 0.544715 seconds
+2) Time = 0.538514 seconds
+3) Time = 0.533134 seconds
+---------------------------------
