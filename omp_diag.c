@@ -9,8 +9,6 @@
 double maxeps = 1e-7;
 int itmax = 100;
 double eps;
-double w = 1.2; //1.2
-int i,j;
 
 double A[N][N];
 
@@ -66,30 +64,43 @@ void init()
 }
 
 void relax()
-{   
-    #pragma omp parallel  private(i, j)  reduction(max:eps)
+{
+    const double inv6 = 1.0 / 6.0;
+    double local_eps = 0.0;
+
+    // Обход по диагоналям: k = i + j
+    // Диагонали от 2 (1+1) до 2*(N-2) ((N-2)+(N-2))
+    for (int k = 2; k <= 2*(N-2); k++)
     {
-        #pragma omp for
-        for(i=1; i<=N-2; i++)
-        for(j=1 + i%2; j<=N-2; j += 2)
+        double diag_eps = 0.0;
+        
+        // Определяем границы для текущей диагонали
+        int i_min = (k <= N-1) ? 1 : k - (N-2);
+        int i_max = (k <= N-1) ? k-1 : N-2;
+        
+        // Параллельно обрабатываем все точки на диагонали
+        #pragma omp parallel for reduction(max:diag_eps)
+        for (int i = i_min; i <= i_max; i++)
         {
-            double b;
-            b = w*((2*A[i-1][j]+A[i+1][j]+2*A[i][j-1]+A[i][j+1])/6. - A[i][j]);
-            eps =  Max(fabs(b),eps);
-            A[i][j] = A[i][j] + b;
+            int j = k - i;
+            if (j >= 1 && j <= N-2)
+            {
+                double old = A[i][j];
+                // Используем новые значения для A[i-1][j] и A[i][j-1] 
+                // (они на предыдущих диагоналях, уже обработаны)
+                // и старые значения для A[i+1][j] и A[i][j+1]
+                // (они на следующих диагоналях, еще не обработаны)
+                double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) * inv6;
+                A[i][j] = newv;
+                double diff = fabs(newv - old);
+                if (diff > diag_eps) diag_eps = diff;
+            }
         }
+        
+        if (diag_eps > local_eps) local_eps = diag_eps;
     }
-    #pragma omp parallel private(i, j)
-    {
-        #pragma omp for
-        for(i=1; i<=N-2; i++)
-        for(j=1+(i+1)%2; j<=N-2; j += 2)
-        {
-            double b;
-            b = w*((2*A[i-1][j]+A[i+1][j]+2*A[i][j-1]+A[i][j+1])/6. - A[i][j]);
-            A[i][j] = A[i][j] + b;
-        }
-    }
+    
+    eps = local_eps;
 }
 
 void verify()

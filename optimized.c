@@ -4,7 +4,7 @@
 #include <omp.h>
 
 #define Max(a,b) ((a)>(b)?(a):(b))
-#define N (2*2*2*2*2*2*2*2*2*2*2+2)
+#define N (2*2*2*2*2*2*2*2*2*2*2*2*2+2)
 
 double maxeps = 1e-7;
 int itmax = 100;
