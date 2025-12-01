@@ -6,32 +6,25 @@
 #define Max(a,b) ((a)>(b)?(a):(b))
 #define NMAX 5000
 
+#ifndef N
+#define N 66
+#endif
+
 double maxeps = 1e-7;
 int itmax = 10000;
 double eps;
 int i,j;
-int N;
 
 double A[NMAX][NMAX];
 
-int arrayN[] = {66, 130, 258, 514, 1026, 2050};
-int nmax = 6;
+//int arrayN[] = {66, 130, 258, 514, 1026, 2050};
+// int nmax = 6;
 
 void relax();
 void init();
 void verify();
-void myfunc();
 
 int main(int argc, char **argv) {
-    for (int index = 0; index < nmax; index++) {
-        N = arrayN[index];
-        myfunc();
-    }
-    return 0;
-}
-
-void myfunc()
-{
     double t_start = omp_get_wtime();
 
     init();
@@ -73,37 +66,35 @@ void init()
             A[i][j] = 2.0 + i + j;
 }
 
-void relax()
-{
+void relax() {
     const double inv6 = 1.0 / 6.0;
     double local_eps = 0.0;
-
-    for (int k = 2; k <= 2*(N-2); k++)
+ 
+    #pragma omp parallel reduction(max:local_eps)
     {
-        double diag_eps = 0.0;
-        
-        int i_min = (k <= N-1) ? 1 : k - (N-2);
-        int i_max = (k <= N-1) ? k-1 : N-2;
-        
-        #pragma omp parallel for reduction(max:diag_eps)
-        for (int i = i_min; i <= i_max; i++)
-        {
-            int j = k - i;
-            double old = A[i][j];
-            double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) * inv6;
-            A[i][j] = newv;
-            double diff = fabs(newv - old);
-            if (diff > diag_eps) diag_eps = diff;
-        } 
-        
-        if (diag_eps > local_eps) local_eps = diag_eps;
+        for (int k = 2; k <= 2*(N-2); k++) {
+            int i_min = (k <= N-1) ? 1 : k - (N-2);
+            int i_max = (k <= N-1) ? k-1 : N-2;
+            
+            #pragma omp for schedule(static) nowait
+            for (int i = i_min; i <= i_max; i++) {
+                int j = k - i;
+                double old = A[i][j];
+                double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) * inv6;
+                A[i][j] = newv;
+                double diff = fabs(newv - old);
+                
+                #pragma omp critical
+                {
+                    if (diff > local_eps) local_eps = diff;
+                }
+            }
+            
+            #pragma omp barrier
+        }
     }
     
-    #pragma omp critical 
-        {
-        if (local_eps > eps)
-            eps = local_eps;
-        } 
+    eps = local_eps;
 }
 
 void verify()

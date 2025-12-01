@@ -1,0 +1,10 @@
+N=66
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.010451 seconds
+N=130
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.031613 seconds
+N=258
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.614358 seconds
+N=514
+S = 0.000610, Iteartion = 1459, N = 514, Time = 3.210742 seconds
+N=1026
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 20.329069 seconds

@@ -1,0 +1,77 @@
+N=66
+N=66 p=1
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.003161 seconds
+N=66 p=2
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.002176 seconds
+N=66 p=3
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.003213 seconds
+N=66 p=4
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.005639 seconds
+N=66 p=5
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.006887 seconds
+N=66 p=6
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.003535 seconds
+N=66 p=7
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.006579 seconds
+N=66 p=8
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.078126 seconds
+N=130
+N=130 p=1
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.028048 seconds
+N=130 p=2
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.010216 seconds
+N=130 p=3
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.007699 seconds
+N=130 p=4
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.008277 seconds
+N=130 p=5
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.020244 seconds
+N=130 p=6
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.099454 seconds
+N=130 p=7
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.083880 seconds
+N=130 p=8
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.420491 seconds
+N=258
+N=258 p=1
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.404755 seconds
+N=258 p=2
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.153692 seconds
+N=258 p=3
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.257938 seconds
+N=258 p=4
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.196783 seconds
+N=258 p=5
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.144219 seconds
+N=258 p=6
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.186575 seconds
+N=258 p=7
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.164243 seconds
+N=258 p=8
+S = 0.000184, Iteartion = 1075, N = 258, Time = 3.333250 seconds
+N=514
+N=514 p=1
+S = 0.000388, Iteartion = 1954, N = 514, Time = 1.208450 seconds
+N=514 p=2
+S = 0.000388, Iteartion = 1954, N = 514, Time = 0.968884 seconds
+N=514 p=3
+S = 0.000388, Iteartion = 1954, N = 514, Time = 0.857915 seconds
+N=514 p=4
+S = 0.000388, Iteartion = 1954, N = 514, Time = 0.869187 seconds
+N=514 p=5
+S = 0.000388, Iteartion = 1954, N = 514, Time = 1.343760 seconds
+N=514 p=6
+S = 0.000388, Iteartion = 1954, N = 514, Time = 1.211308 seconds
+N=514 p=7
+S = 0.000388, Iteartion = 1954, N = 514, Time = 3.029377 seconds
+N=514 p=8
+S = 0.000388, Iteartion = 1954, N = 514, Time = 2.770380 seconds
+N=1026
+N=1026 p=1
+S = 0.000825, Iteartion = 3648, N = 1026, Time = 15.124933 seconds
+N=1026 p=2
+S = 0.000825, Iteartion = 3648, N = 1026, Time = 8.558497 seconds
+N=1026 p=3
+S = 0.000825, Iteartion = 3648, N = 1026, Time = 9.306531 seconds
+N=1026 p=4
+S = 0.000825, Iteartion = 3648, N = 1026, Time = 9.143312 seconds

@@ -1,0 +1,7 @@
+DATE=2025-12-01T21:17:55+03:00 HOST=Victoria-PC PWD=/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod
+CORES=8
+N=66
+N=130
+N=258
+N=514
+N=1026

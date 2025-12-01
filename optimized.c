@@ -6,32 +6,25 @@
 #define Max(a,b) ((a)>(b)?(a):(b))
 #define NMAX 5000
 
+#ifndef N
+#define N 66
+#endif
+
 double maxeps = 1e-7;
 int itmax = 10000;
 double eps;
 int i,j;
-int N;
 
 double A[NMAX][NMAX];
 
-int arrayN[] = {66, 130, 258, 514, 1026, 2050};
-int nmax = 6;
+//int arrayN[] = {66, 130, 258, 514, 1026, 2050};
+// int nmax = 6;
 
 void relax();
 void init();
 void verify();
-void myfunc();
 
 int main(int argc, char **argv) {
-    for (int index = 0; index < nmax; index++) {
-        N = arrayN[index];
-        myfunc();
-    }
-    return 0;
-}
-
-void myfunc()
-{
     double t_start = omp_get_wtime();
 
     init();
