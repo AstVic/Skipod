@@ -1,78 +1,45 @@
 N=66
 N=66 p=1
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.026871 seconds
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.016745 seconds
 N=66 p=2
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.040229 seconds
-N=66 p=3
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.069309 seconds
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.029392 seconds
 N=66 p=4
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.092972 seconds
-N=66 p=5
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.117464 seconds
-N=66 p=6
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.147070 seconds
-N=66 p=7
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.445581 seconds
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.035793 seconds
 N=66 p=8
-S = 0.000077, Iteartion = 307, N = 66, Time = 0.215351 seconds
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.155989 seconds
 N=130
 N=130 p=1
-S = 0.000144, Iteartion = 494, N = 130, Time = 0.125346 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.071535 seconds
 N=130 p=2
-S = 0.000144, Iteartion = 494, N = 130, Time = 0.244490 seconds
-N=130 p=3
-S = 0.000144, Iteartion = 494, N = 130, Time = 0.390108 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.105420 seconds
 N=130 p=4
-S = 0.000144, Iteartion = 494, N = 130, Time = 0.517496 seconds
-N=130 p=5
-S = 0.000144, Iteartion = 494, N = 130, Time = 0.881144 seconds
-N=130 p=6
-S = 0.000144, Iteartion = 494, N = 130, Time = 4.366822 seconds
-N=130 p=7
-S = 0.000144, Iteartion = 494, N = 130, Time = 6.757907 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.231816 seconds
 N=130 p=8
-S = 0.000144, Iteartion = 494, N = 130, Time = 6.409416 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 7.348406 seconds
 N=258
 N=258 p=1
-S = 0.000283, Iteartion = 832, N = 258, Time = 1.643644 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.279665 seconds
 N=258 p=2
-S = 0.000283, Iteartion = 832, N = 258, Time = 4.764662 seconds
-N=258 p=3
-S = 0.000283, Iteartion = 832, N = 258, Time = 7.360366 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.577431 seconds
 N=258 p=4
-S = 0.000283, Iteartion = 832, N = 258, Time = 16.136525 seconds
-N=258 p=5
-S = 0.000283, Iteartion = 832, N = 258, Time = 16.180350 seconds
-N=258 p=6
-S = 0.000283, Iteartion = 832, N = 258, Time = 25.156244 seconds
-N=258 p=7
-S = 0.000283, Iteartion = 832, N = 258, Time = 21.365471 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 1.180474 seconds
 N=258 p=8
-S = 0.000283, Iteartion = 832, N = 258, Time = 57.209002 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 9.474708 seconds
 N=514
 N=514 p=1
-S = 0.000610, Iteartion = 1459, N = 514, Time = 8.750351 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 1.927585 seconds
 N=514 p=2
-S = 0.000610, Iteartion = 1459, N = 514, Time = 22.306342 seconds
-N=514 p=3
-S = 0.000610, Iteartion = 1459, N = 514, Time = 45.918753 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 1.678696 seconds
 N=514 p=4
-S = 0.000610, Iteartion = 1459, N = 514, Time = 90.734469 seconds
-N=514 p=5
-S = 0.000610, Iteartion = 1459, N = 514, Time = 132.559942 seconds
-N=514 p=6
-S = 0.000610, Iteartion = 1459, N = 514, Time = 127.766893 seconds
-N=514 p=7
-S = 0.000610, Iteartion = 1459, N = 514, Time = 241.470718 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 5.624405 seconds
 N=514 p=8
-S = 0.000610, Iteartion = 1459, N = 514, Time = 283.729182 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 27.232389 seconds
 N=1026
 N=1026 p=1
-S = 0.001421, Iteartion = 2645, N = 1026, Time = 71.331897 seconds
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 10.302445 seconds
 N=1026 p=2
-S = 0.001421, Iteartion = 2645, N = 1026, Time = 229.679397 seconds
-N=1026 p=3
-S = 0.001421, Iteartion = 2645, N = 1026, Time = 334.038041 seconds
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 15.454018 seconds
 N=1026 p=4
-S = 0.001421, Iteartion = 2645, N = 1026, Time = 525.210679 seconds
-N=1026 p=5
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 23.450646 seconds
+N=1026 p=8
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 74.174252 seconds

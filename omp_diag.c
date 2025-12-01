@@ -69,28 +69,31 @@ void init()
 void relax() {
     const double inv6 = 1.0 / 6.0;
     double local_eps = 0.0;
- 
+    
     #pragma omp parallel reduction(max:local_eps)
     {
+        double my_eps = 0.0;
+        
         for (int k = 2; k <= 2*(N-2); k++) {
             int i_min = (k <= N-1) ? 1 : k - (N-2);
             int i_max = (k <= N-1) ? k-1 : N-2;
             
-            #pragma omp for schedule(static) nowait
+            #pragma omp for schedule(static)
             for (int i = i_min; i <= i_max; i++) {
                 int j = k - i;
                 double old = A[i][j];
-                double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) * inv6;
+                double newv = (2.0*A[i-1][j] + A[i+1][j] + 
+                              2.0*A[i][j-1] + A[i][j+1]) * inv6;
                 A[i][j] = newv;
                 double diff = fabs(newv - old);
-                
-                #pragma omp critical
-                {
-                    if (diff > local_eps) local_eps = diff;
-                }
+                if (diff > my_eps) my_eps = diff; 
             }
             
-            #pragma omp barrier
+            #pragma omp critical
+            {
+                if (my_eps > local_eps) local_eps = my_eps;
+            }
+            my_eps = 0.0;
         }
     }
     

@@ -19,8 +19,8 @@ echo "DATE=$(date -Iseconds) HOST=$(hostname) PWD=$(pwd)" >> "$OUT/meta.txt"
 CORES=$(getconf _NPROCESSORS_ONLN 2>/dev/null || nproc 2>/dev/null || echo 1)
 echo "CORES=$CORES" >> "$OUT/meta.txt"
 
-N_LIST="66 130 258 514 1026 2050"
-P_LIST="1 2 3 4 5 6 7 8"  
+N_LIST="66 130 258 514 1026"
+P_LIST="1 2 4 8"  
 
 for N in $N_LIST; do
   echo "N=$N" >> "$OUT/meta.txt"    
