@@ -4,21 +4,33 @@
 #include <omp.h>
 
 #define Max(a,b) ((a)>(b)?(a):(b))
-#define N (2*2*2*2*2*2*2*2*2*2*2*2*2+2)
+#define NMAX 5000
 
 double maxeps = 1e-7;
-int itmax = 100;
+int itmax = 10000;
 double eps;
-double w = 1.2; //1.2
 int i,j;
+int N;
 
-double A[N][N];
+double A[NMAX][NMAX];
+
+int arrayN[] = {66, 130, 258, 514, 1026, 2050};
+int nmax = 6;
 
 void relax();
 void init();
 void verify();
+void myfunc();
 
-int main(int argc, char **argv)
+int main(int argc, char **argv) {
+    for (int index = 0; index < nmax; index++) {
+        N = arrayN[index];
+        myfunc();
+    }
+    return 0;
+}
+
+void myfunc()
 {
     double t_start = omp_get_wtime();
 
@@ -29,21 +41,18 @@ int main(int argc, char **argv)
     {
         eps = 0.0;
         relax();
-        printf("it=%4i   eps=%f\n", it, eps);
+        //printf("it=%4i   eps=%f\n", it, eps);
         if (eps < maxeps) break;
     }
 
     verify();
 
     double t_end = omp_get_wtime();
-    printf("Time = %f seconds\n", t_end - t_start);
-
-    return 0;
+    printf("Iteartion = %d, N = %d, Time = %f seconds\n", it, N, t_end - t_start);
 }
 
 void init()
 {
-    // Распараллеливаем инициализацию границ
     #pragma omp parallel for
     for (int i = 0; i < N; i++)
     {
@@ -58,7 +67,6 @@ void init()
         A[N-1][j] = 0.0;
     }
 
-    // Распараллеливаем инициализацию внутренних ячеек
     #pragma omp parallel for collapse(2)
     for (int i = 1; i < N-1; i++)
         for (int j = 1; j < N-1; j++)
@@ -73,21 +81,24 @@ void relax()
         for(i=1; i<=N-2; i++)
         for(j=1 + i%2; j<=N-2; j += 2)
         {
-            double b;
-            b = w*((2*A[i-1][j]+A[i+1][j]+2*A[i][j-1]+A[i][j+1])/6. - A[i][j]);
-            eps =  Max(fabs(b),eps);
-            A[i][j] = A[i][j] + b;
+            double old = A[i][j];
+            double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) / 6.;
+            A[i][j] = newv;
+            double diff = fabs(newv - old);
+            if (diff > eps) eps = diff;
         }
     }
-    #pragma omp parallel private(i, j)
+    #pragma omp parallel private(i, j) reduction(max:eps)
     {
         #pragma omp for
         for(i=1; i<=N-2; i++)
         for(j=1+(i+1)%2; j<=N-2; j += 2)
         {
-            double b;
-            b = w*((2*A[i-1][j]+A[i+1][j]+2*A[i][j-1]+A[i][j+1])/6. - A[i][j]);
-            A[i][j] = A[i][j] + b;
+            double old = A[i][j];
+            double newv = (2.0*A[i-1][j] + A[i+1][j] + 2.0*A[i][j-1] + A[i][j+1]) / 6.;
+            A[i][j] = newv;
+            double diff = fabs(newv - old);
+            if (diff > eps) eps = diff;
         }
     }
 }
@@ -97,7 +108,6 @@ void verify()
     double s = 0.0;
     double nn = 1.0 / (N * N); 
 
-    // Распараллеливаем вычисление суммы с редукцией
     #pragma omp parallel for reduction(+:s)
     for (int i = 0; i < N; i++)
     {
@@ -110,5 +120,5 @@ void verify()
         s += row_sum;
     }
     
-    printf("  S = %f\n", s);
+    printf("S = %f, ", s);
 }

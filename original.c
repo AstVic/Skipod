@@ -2,44 +2,54 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-#define  Max(a,b) ((a)>(b)?(a):(b))
 
-#define  N   (2*2*2*2*2*2*2*2*2*2*2*2*2+2)
-double   maxeps = 0.1e-7;
-int itmax = 100;
-int i,j,k;
+#define Max(a,b) ((a)>(b)?(a):(b))
+#define NMAX 5000
+
+double maxeps = 1e-7;
+int itmax = 10000;
 double eps;
+int i,j;
+int N;
 
-double A [N][N];
+double A[NMAX][NMAX];
+
+int arrayN[] = {66, 130, 258, 514, 1026, 2050};
+int nmax = 6;
 
 void relax();
 void init();
-void verify(); 
+void verify();
+void myfunc();
 
-int main(int an, char **as)
-{
-	double t_start = omp_get_wtime();
-
-	int it;
-
-	init();
-
-	for(it=1; it<=itmax; it++)
-	{
-		eps = 0.;
-		relax();
-		printf( "it=%4i   eps=%f\n", it,eps);
-		if (eps < maxeps) break;
-	}
-
-	verify();
-
-	double t_end = omp_get_wtime();
-    printf("Time = %f seconds\n", t_end - t_start);
-
-	return 0;
+int main(int argc, char **argv) {
+    for (int index = 0; index < nmax; index++) {
+        N = arrayN[index];
+        myfunc();
+    }
+    return 0;
 }
 
+void myfunc()
+{
+    double t_start = omp_get_wtime();
+
+    init();
+
+    int it;
+    for (it = 1; it <= itmax; it++)
+    {
+        eps = 0.0;
+        relax();
+        //printf("it=%4i   eps=%f\n", it, eps);
+        if (eps < maxeps) break;
+    }
+
+    verify();
+
+    double t_end = omp_get_wtime();
+    printf("Iteartion = %d, N = %d, Time = %f seconds\n", it, N, t_end - t_start);
+}
 
 void init()
 { 
@@ -78,6 +88,6 @@ void verify()
 	{
 		s=s+A[i][j]*(i+1)*(j+1)/(N*N);
 	}
-	printf("  S = %f\n",s);
+	printf("S = %f, ", s);
 
 }

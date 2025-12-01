@@ -1,0 +1,51 @@
+РЕЗУЛЬТАТЫ ЗАПУСКОВ ОРИГИНАЛЬНОЙ ПРОГРАММЫ
+
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ gcc -O3 -fopenmp -o original original.c
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ ./original
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.008265 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.057741 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.373708 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 2.662544 seconds
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 31.407089 seconds
+S = 0.003366, Iteartion = 4923, N = 2050, Time = 273.501966 seconds
+
+------------------------------------------------------------------------------------------------------------------
+
+РЕЗУЛЬТАТЫ ЗАПУСКОВ ОПТИМИЗИРОВАННОЙ ПРОГРАММЫ
+
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ gcc -O3 -fopenmp -o optimized optimized.c
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ ./optimized
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.005052 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.033155 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.242302 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 1.504652 seconds
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 17.220842 seconds
+S = 0.003366, Iteartion = 4923, N = 2050, Time = 153.433234 seconds
+
+------------------------------------------------------------------------------------------------------------------
+
+РЕЗУЛЬТАТЫ ЗАПУСКОВ ПРОГРАММЫ, РАСПАРАЛЛЕЛЕННОЙ ПО МЕТОДУ ГИПЕРПЛОСКОСТЕЙ
+
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ gcc -O3 -fopenmp -o omp_diag omp_diag.c
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ export OMP_NUM_THREADS=8
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ ./omp_diag
+S = 0.000077, Iteartion = 307, N = 66, Time = 0.149748 seconds
+S = 0.000144, Iteartion = 494, N = 130, Time = 0.299340 seconds
+S = 0.000283, Iteartion = 832, N = 258, Time = 0.964629 seconds
+S = 0.000610, Iteartion = 1459, N = 514, Time = 3.470828 seconds
+S = 0.001421, Iteartion = 2645, N = 1026, Time = 65.817564 seconds
+S = 0.003366, Iteartion = 4923, N = 2050, Time = 322.390628 seconds
+
+------------------------------------------------------------------------------------------------------------------
+
+РЕЗУЛЬТАТЫ ЗАПУСКОВ ПРОГРАММЫ, РАСПАРАЛЛЕЛЕННОЙ ПО МЕТОДУ RED BLACK
+
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ gcc -O3 -fopenmp -o omp_for omp_for.c
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ export OMP_NUM_THREADS=8
+victoria@Victoria-PC:/mnt/c/Users/Elena/Desktop/MSU/3 курс/Скиподы/Skipod$ ./omp_for
+S = 0.000051, Iteartion = 363, N = 66, Time = 0.074373 seconds
+S = 0.000094, Iteartion = 612, N = 130, Time = 0.010598 seconds
+S = 0.000184, Iteartion = 1075, N = 258, Time = 0.064874 seconds
+S = 0.000388, Iteartion = 1954, N = 514, Time = 0.333203 seconds
+S = 0.000825, Iteartion = 3648, N = 1026, Time = 2.706893 seconds
+S = 0.001896, Iteartion = 6943, N = 2050, Time = 85.885387 seconds
